@@ -8,6 +8,7 @@ const app = express();
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/signup.html");
 });
@@ -35,14 +36,14 @@ app.post("/", function (req, res) {
 
   const options = {
     method: "POST",
-    auth: "swastikop:487709f550fdd3d0ccb92c182805eedb-us17",
+    auth: "swastikop:a487709f550fdd3d0ccb92c182805eedb-us17",
   };
 
   const request = https.request(url, options, function (response) {
     if (response.statusCode === 200) {
-      res.send("Wohhooo You are successfully subscribed!");
+      res.sendFile(__dirname + "/success.html");
     } else {
-      res.send("Plz try again later :|");
+      res.sendFile(__dirname + "/failure.html");
     }
     response.on("data", function (data) {
       console.log(JSON.parse(data));
@@ -51,6 +52,10 @@ app.post("/", function (req, res) {
   request.write(jsonData);
 
   request.end();
+});
+
+app.post("/failure", function (req, res) {
+  res.redirect("/");
 });
 
 app.listen(3000, function () {
