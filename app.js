@@ -36,7 +36,7 @@ app.post("/", function (req, res) {
 
   const options = {
     method: "POST",
-    auth: "swastikop:a487709f550fdd3d0ccb92c182805eedb-us17",
+    auth: "swastikop:487709f550fdd3d0ccb92c182805eedb-us17",
   };
 
   const request = https.request(url, options, function (response) {
@@ -58,6 +58,6 @@ app.post("/failure", function (req, res) {
   res.redirect("/");
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server running on port 3000");
 });
