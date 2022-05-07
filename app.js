@@ -39,6 +39,11 @@ app.post("/", function (req, res) {
   };
 
   const request = https.request(url, options, function (response) {
+    if (response.statusCode === 200) {
+      res.send("Wohhooo You are successfully subscribed!");
+    } else {
+      res.send("Plz try again later :|");
+    }
     response.on("data", function (data) {
       console.log(JSON.parse(data));
     });
@@ -51,8 +56,3 @@ app.post("/", function (req, res) {
 app.listen(3000, function () {
   console.log("Server running on port 3000");
 });
-
-//api key 487709f550fdd3d0ccb92c182805eedb-us17
-// UNIQUE ID
-
-// uniquer id     5fb6f7825b.
